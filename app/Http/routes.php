@@ -12,6 +12,10 @@
 */
 Route::group(['middleware' => 'android'], function () {
     Route::post('/api/v1/reclamo', 'ReclamoController@store');
+    Route::get('/api/v1/descargar/gastos_medicos', 'DescargaController@gastos_medicos');
+    Route::get('/api/v1/descargar/denuncia_siniestro', 'DescargaController@denuncia_siniestro');
+    Route::get('/api/v1/descargar/seguro_arrendamiento', 'DescargaController@seguro_arrendamiento');
+    Route::get('/api/v1/descargar/seguro_vida', 'DescargaController@seguro_vida');
 });
 
 Route::get('/', function () {

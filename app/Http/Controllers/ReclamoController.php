@@ -43,15 +43,20 @@ class ReclamoController extends Controller
     public function store(Request $request)
     {
         $reclamo = new Reclamo();
+        $reclamo->tipo_reclamo = $request['tipo'];
         $reclamo->client_nombre = $request['nombre'];
         $reclamo->client_ci = $request['ci'];
+        $reclamo->client_phone = $request['phone'];
         $reclamo->car_marca = $request['marca'];
         $reclamo->car_modelo = $request['modelo'];
         $reclamo->car_year = $request['anio'];
         $reclamo->car_placa = $request['placa'];
+        $reclamo->grua = $request['grua'];
         $reclamo->save();
         return response()->json(['response' => 'saved']);
     }
+    
+    
 
     /**
      * Display the specified resource.

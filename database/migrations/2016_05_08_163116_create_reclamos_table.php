@@ -14,6 +14,7 @@ class CreateReclamosTable extends Migration
     {
         Schema::create('reclamos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('tipo_reclamo');
             $table->string('client_nombre');
             $table->string('client_ci');
             $table->string('car_marca');
