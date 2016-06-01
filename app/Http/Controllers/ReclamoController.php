@@ -20,8 +20,20 @@ class ReclamoController extends Controller
      */
     public function index()
     {
-        $reclamos = Reclamo::all();
-        return view('reclamos.index')->with('reclamos',$reclamos);
+        $reclamos = Reclamo::where('estado',"Pendiente");
+        return view('reclamos.index')->with('reclamos',$reclamos->get());
+    }
+    
+    public function atendidos()
+    {
+        $reclamos = Reclamo::where('estado',"Atendido");
+        return view('reclamos.atendidos')->with('reclamos',$reclamos->get());
+    }
+    
+    public function anulados()
+    {
+        $reclamos = Reclamo::where('estado',"Anulado");
+        return view('reclamos.anulados')->with('reclamos',$reclamos->get());
     }
 
     /**
@@ -54,6 +66,34 @@ class ReclamoController extends Controller
         $reclamo->grua = $request['grua'];
         $reclamo->save();
         return response()->json(['response' => 'saved']);
+    }
+    
+    public function atender(Request $request){
+        $this->validate($request, [
+            'id_reclamo' => 'required',
+            'date_atendido' => 'required',
+            'des_atendido' => 'required',
+        ]);
+        $reclamo = Reclamo::find($request['id_reclamo']);
+        $reclamo->estado = "Atendido";
+        $reclamo->date_atendido = date("Y-m-d", strtotime($request['date_atendido'])); 
+        $reclamo->atendido = $request['des_atendido'];
+        $reclamo->save();
+        return redirect('/reclamo/atendidos');
+    }
+    
+    public function anular(Request $request){
+        $this->validate($request, [
+            'id_reclamo' => 'required',
+            'date_anulado' => 'required',
+            'des_anulado' => 'required',
+        ]);
+        $reclamo = Reclamo::find($request['id_reclamo']);
+        $reclamo->estado = "Anulado";
+        $reclamo->date_anulado = date("Y-m-d", strtotime($request['date_anulado'])); 
+        $reclamo->anulado = $request['des_anulado'];
+        $reclamo->save();
+        return redirect('/reclamo/anulados');
     }
     
     

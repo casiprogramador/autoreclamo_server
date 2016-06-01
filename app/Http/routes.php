@@ -28,6 +28,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/home', 'HomeController@index');
 
     Route::get('/reclamo', 'ReclamoController@index');
+    Route::get('/reclamo/atendidos', 'ReclamoController@atendidos');
+    Route::post('/reclamo/atender', 'ReclamoController@atender');
+    Route::get('/reclamo/anulados', 'ReclamoController@anulados');
+    Route::post('/reclamo/anular', 'ReclamoController@anular');
+    Route::get('/reportes', 'ReporteController@index');
+    Route::post('/reportes/crear', 'ReporteController@crear');
 
 });
 

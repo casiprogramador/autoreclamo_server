@@ -38,8 +38,8 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li><a href="" class="info-auto" data-toggle="modal" data-target="#infoModal" marca="{{$reclamo->car_marca}}" modelo="{{$reclamo->car_modelo}}" anio="{{$reclamo->car_year}}" placa="{{$reclamo->car_placa}}">Informacion Automovil</a></li>
-                                        <li><a href="" data-toggle="modal" data-target="#atenderModal">Atender Reclamo</a></li>
-                                        <li><a href="" data-toggle="modal" data-target="#anularModal">Borrar Reclamo</a></li>
+                                        <li><a href="" class="atender-reclamo" data-toggle="modal" data-target="#atenderModal" id-reclamo="{{$reclamo->id}}">Atender Reclamo</a></li>
+                                        <li><a href="" class="anular-reclamo" data-toggle="modal" data-target="#anularModal" id-reclamo="{{$reclamo->id}}">Anular Reclamo</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -102,22 +102,26 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Atender Reclamo</h4>
           </div>
+          <form method="POST" action="{{ url('/reclamo/atender') }}">
           <div class="modal-body">
-            <form>
+            
+              {!! csrf_field() !!}
+              <input type="hidden" class="id-reclamo" name="id_reclamo" value=""/>
               <div class="form-group">
                 <label for="recipient-name" class="control-label">Fecha Atencion:</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <input type="text" class="form-control date" id="recipient-name" name="date_atendido">
               </div>
               <div class="form-group">
                 <label for="message-text" class="control-label">Descripcion de la atencion:</label>
-                <textarea class="form-control" id="message-text"></textarea>
+                <textarea class="form-control" id="message-text" name="des_atendido"></textarea>
               </div>
-            </form>
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Atender</button>
+            <button type="submit" class="btn btn-primary">Atender</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
@@ -129,22 +133,26 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Anular Reclamo</h4>
           </div>
+          <form method="POST" action="{{ url('/reclamo/anular') }}">
           <div class="modal-body">
-            <form>
+            
+              {!! csrf_field() !!}
+              <input type="hidden" class="id-reclamo" name="id_reclamo" value=""/>
               <div class="form-group">
                 <label for="recipient-name" class="control-label">Fecha Anulacion:</label>
-                <input type="text" class="form-control" id="recipient-name">
+                <input type="text" class="form-control date" id="recipient-name" name="date_anulado">
               </div>
               <div class="form-group">
                 <label for="message-text" class="control-label">Motivo de Anulacion:</label>
-                <textarea class="form-control" id="message-text"></textarea>
+                <textarea class="form-control" id="message-text" name="des_anulado"></textarea>
               </div>
-            </form>
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-primary">Anular</button>
+            <button type="submit" class="btn btn-primary">Anular</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
